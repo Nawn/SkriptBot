@@ -1,5 +1,10 @@
 module Skript
 	class Bot
+		@website_url = "http://localhost:3000"
+		class << self
+			attr_accessor :website_url
+		end
+
 		def initialize(args)
 				
 		end
