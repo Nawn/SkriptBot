@@ -3,10 +3,16 @@ module SkriptEvents
     extend Discordrb::Commands::CommandContainer
 
 	  command :register  do |event, user|
-  		if event.bot.parse_mention(user).is_a?(Discordrb::User)
-  			"That's right!"
+      discord_user = event.bot.parse_mention(user)
+  		if discord_user.is_a?(Discordrb::User)
+        input_hash = {
+          "User Name" => "#{discord_user.username}",
+          "User ID" => "#{discord_user.id}"
+        }
+        
+  			next Skript::Bot.debug_hash(input_hash)
   		else
-        Skript::Bot.argument_error("User is invalid")
+        next Skript::Bot.argument_error("User is invalid")
   		end
 	  end
   end
