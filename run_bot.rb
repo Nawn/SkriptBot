@@ -1,6 +1,7 @@
 #requires the library used to contact Discord
 #Windows fix ↓ to allow audio for discordrb
 #::RBNACL_LIBSODIUM_GEM_LIB_PATH = "C:/libsodium.dll"
+
 require 'discordrb'
 # require_relative 'lib/generic_bot'
 require_relative 'lib/skript_bot'

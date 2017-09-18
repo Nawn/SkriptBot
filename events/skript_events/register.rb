@@ -6,7 +6,7 @@ module SkriptEvents
   		if event.bot.parse_mention(user).is_a?(Discordrb::User)
   			"That's right!"
   		else
-  			"That's wrong! :c"
+        Skript::Bot.argument_error("User is invalid")
   		end
 	  end
   end
