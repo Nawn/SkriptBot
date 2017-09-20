@@ -45,8 +45,13 @@ module Skript
 			# The last one should be an & character.
 			# So, remove it. 
 			query_url[-1] = ""
-
-			response = RestClient.get(query_url)
+			begin
+				response = RestClient.get(query_url)
+			rescue Errno::ECONNREFUSED => @r
+				response = "WEBSITE UNREACHABLE!"	
+			rescue RestClient::InternalServerError => @e	
+				response = "WEBSITE INTERNAL SERVER ERROR: #{@e}"
+			end
 
 			Skript::Bot.debug_hash({"response" => response})
 		end
