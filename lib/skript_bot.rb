@@ -26,7 +26,7 @@ module Skript
 			return return_string
 		end
 
-		def self.new_user(discord_user, event=nil)
+		def self.new_user(discord_user)
 
 			query_params = {
 				"bot_key" => "#{Skript::Bot.api_key}",
@@ -59,9 +59,7 @@ module Skript
 
 			# On Successful, reply with PM to user with LINK provided from web
 			# On Fail, print message and message user with login creation link
-			event.channel.send_temporary_message(response['message'], 2) if event
-
-
+			response['message']
 		end
 	end
 end
