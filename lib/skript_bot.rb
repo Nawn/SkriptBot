@@ -1,4 +1,5 @@
 require "rest-client"
+require "json"
 
 module Skript
 	class Bot
@@ -45,15 +46,21 @@ module Skript
 			# The last one should be an & character.
 			# So, remove it. 
 			query_url[-1] = ""
+
+			response = {}
+
 			begin
-				response = RestClient.get(query_url)
+				response = JSON.parse(RestClient.get(query_url))
 			rescue Errno::ECONNREFUSED => @r
-				response = "WEBSITE UNREACHABLE!"	
+				response['message'] = "WEBSITE UNREACHABLE!"	
 			rescue RestClient::InternalServerError => @e	
-				response = "WEBSITE INTERNAL SERVER ERROR: #{@e}"
+				response['message'] = "WEBSITE INTERNAL SERVER ERROR: #{@e}"
 			end
 
-			Skript::Bot.debug_hash({"response" => response})
+			# On Successful, reply with PM to user with LINK provided from web
+			# On Fail, print message and message user with login creation link
+
+			response['message']
 		end
 	end
 end
