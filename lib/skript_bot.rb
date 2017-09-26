@@ -26,7 +26,7 @@ module Skript
 			return return_string
 		end
 
-		def self.new_user(discord_user)
+		def self.new_user(discord_user, event)
 
 			query_params = {
 				"bot_key" => "#{Skript::Bot.api_key}",
@@ -59,6 +59,11 @@ module Skript
 
 			# On Successful, reply with PM to user with LINK provided from web
 			# On Fail, print message and message user with login creation link
+
+			if response['success'] == 'true'
+				event.author.pm("`PLEASE SELECT GUILD WARS USER FOR #{discord_user.username}:` #{response['url']}")
+			end
+
 			response['message']
 		end
 	end
