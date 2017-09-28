@@ -35,5 +35,26 @@ end
 #gen_bot.join
 
 # Create second thread to host skript
-gen_bot_two = Thread.new {skript.run}
+gen_bot_two = Thread.new {
+  # Set role permissions
+  # In order: Initiate, Guild Member, Jr Officer, Sr Officer
+  # The Other Guy, and Bots
+  skript.set_role_permission(337062826801758210, 0)
+  skript.set_role_permission(337062083654844418, 1)
+  skript.set_role_permission(337061672940339201, 2)
+  skript.set_role_permission(337061298233933824, 3)
+  skript.set_role_permission(337060888068751363, 4)
+  skript.set_role_permission(329123897825951746, 5)
+
+  skript.run
+
+## Should you ever wish to inspect servers Roles, 
+#  simply place the server ID and let the magic happen
+# 
+#  skript.servers[328738686650810369].roles.each { |role|
+#    puts "Role Name: #{role.name}"
+#    puts "Role ID: #{role.id}"
+#    puts "\n\n"
+#  }
+}
 gen_bot_two.join

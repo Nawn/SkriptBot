@@ -2,7 +2,7 @@ module SkriptEvents
   module Register
     extend Discordrb::Commands::CommandContainer
 
-	  command :register  do |event, user|
+	  command(:register, {:permission_level => 2})  do |event, user|
       discord_user = event.bot.parse_mention(user)
   		if discord_user.is_a?(Discordrb::User)
         event.channel.send_temporary_message(Skript::Bot.new_user(discord_user, event), 25)
