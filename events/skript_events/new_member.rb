@@ -4,8 +4,10 @@ module SkriptEvents
     
     #When someone new joins in, greet them
     member_join() do |event|
-      the_role = event.roles.find { |role| role.name == "Initiate" }
-      event.user.roles = the_role
+      the_role = event.server.roles.find { |temp_role| temp_role.name == "Initiate" }
+      puts "The Role: #{the_role}"
+
+      event.user.roles = [the_role]
     end
   end
 end
